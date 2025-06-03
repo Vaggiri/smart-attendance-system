@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Pro | Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <i class="bi bi-person-check-fill"></i>
+                <h1>Attendance<span>Pro</span></h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+                    <li><a href="#"><i class="bi bi-people-fill"></i>Students</a></li>
+                    <li><a href="#"><i class="bi bi-calendar-check"></i>Attendance</a></li>
+                    <li><a href="#"><i class="bi bi-file-earmark-bar-graph"></i>Reports</a></li>
+                    <li><a href="#"><i class="bi bi-gear-fill"></i>Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="bi bi-sun-fill"></i>
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin">
+                    <div>
+                        <h4>Admin User</h4>
+                        <small>Super Admin</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="menu-toggle"><i class="bi bi-list"></i></button>
+                    <h2>Dashboard Overview</h2>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" placeholder="Search students...">
+                    </div>
+                    <div class="notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="icon-box blue">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,248</h3>
+                        <p>Total Students</p>
+                        <span class="trend up"><i class="bi bi-arrow-up"></i> 12%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card fade-in delay-1">
+                    <div class="icon-box green">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>876</h3>
+                        <p>Present Today</p>
+                        <span class="trend down"><i class="bi bi-arrow-down"></i> 5%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card fade-in delay-2">
+                    <div class="icon-box red">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>98</h3>
+                        <p>Absent Today</p>
+                        <span class="trend down"><i class="bi bi-arrow-down"></i> 8%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card fade-in delay-3">
+                    <div class="icon-box purple">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>89.7%</h3>
+                        <p>Attendance Rate</p>
+                        <span class="trend up"><i class="bi bi-arrow-up"></i> 2.3%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="chart-card slide-in">
+                    <div class="chart-header">
+                        <h3>Weekly Attendance Trend</h3>
+                        <select class="chart-select">
+                            <option>This Week</option>
+                            <option>Last Week</option>
+                            <option>This Month</option>
+                        </select>
+                    </div>
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+                
+                <div class="recent-activity slide-in delay-1">
+                    <div class="activity-header">
+                        <h3>Recent Scans</h3>
+                        <button class="view-all">View All</button>
+                    </div>
+                    <div class="activity-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Attendance Table -->
+            <section class="attendance-table slide-in delay-2">
+                <div class="table-header">
+                    <h3>Today's Attendance</h3>
+                    <div class="table-actions">
+                        <button class="export-btn"><i class="bi bi-download"></i> Export</button>
+                        <div class="filter-dropdown">
+                            <button class="filter-btn"><i class="bi bi-funnel"></i> Filter</button>
+                            <div class="dropdown-content">
+                                <label><input type="checkbox" checked> Present</label>
+                                <label><input type="checkbox" checked> Absent</label>
+                                <label><input type="checkbox" checked> Late</label>
+                                <button class="apply-filter">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="table-info">
+                        Showing <span class="current-entries">1</span> to <span class="total-entries">10</span> of <span class="all-entries">124</span> entries
+                    </div>
+                    <div class="pagination">
+                        <button class="page-btn disabled"><i class="bi bi-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Loading Dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container">
+        <!-- Toast notifications will appear here -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
